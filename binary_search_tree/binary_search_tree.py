@@ -33,25 +33,18 @@ class BSTNode:
     def contains(self, target):
         if self.value == target:
             return True
-        if self.left and self.right:
-            return self.left.contains(target) or self.right.contains(target)
-        elif self.left:
+        if self.value > target and self.left:
             return self.left.contains(target)
-        elif self.right:
+        elif self.value < target and self.right:
             return self.right.contains(target)
         else:
             return False
 
     # Return the maximum value found in the tree
     def get_max(self):
-        if self.left is None and self.right is None:
+        if self.right is None:
             return self.value 
-        elif self.left and self.right:
-            return max(self.value, self.left.get_max(), self.right.get_max())
-        elif self.left:
-            return max(self.value, self.left.get_max())
-        elif self.right:
-            return max(self.value, self.right.get_max())
+        return max(self.value, self.right.get_max())
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
